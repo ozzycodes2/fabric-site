@@ -31,7 +31,7 @@ function Details({ role, name, variant, format }: Omit<TileProps, "featured"> & 
   return (
     <>
       <span className="relative flex items-center gap-xxs">
-        <span className="truncate text-body font-medium text-ink">{name}</span>
+        <span className="truncate text-body text-ink">{name}</span>
         <InfoTip label={`About ${name}`} text={role.use} />
       </span>
       <CopyButton value={formatColor(role[variant], format)} label={`Copy ${name} ${variant} ${format}`} />
@@ -107,7 +107,7 @@ export function PaletteView({ palette }: { palette: Palette }) {
           </div>
           {groups.map((g) => (
             <div key={g.name} className="mt-xxl">
-              <h3 className="mb-md text-subhead font-semibold text-ink">{g.name}</h3>
+              <h3 className="mb-md text-subhead text-ink">{g.name}</h3>
               <ul
                 className={`m-0 grid list-none grid-cols-2 gap-x-md gap-y-lg p-0 ${COLS[g.roles.length] ?? "sm:grid-cols-4"}`}
               >
@@ -118,7 +118,7 @@ export function PaletteView({ palette }: { palette: Palette }) {
             </div>
           ))}
           <div className="mt-xxl">
-            <h3 className="mb-md text-subhead font-semibold text-ink">Terminal</h3>
+            <h3 className="mb-md text-subhead text-ink">Terminal</h3>
             <TerminalSample palette={palette} variant={v.slug} />
             {[normal, bright].map((row, i) => (
               <ul key={i} className="m-0 mt-lg grid list-none grid-cols-2 gap-x-md gap-y-lg p-0 sm:grid-cols-4">

@@ -41,8 +41,8 @@ export function SwatchBar({ swatches, border }: { swatches: Swatch[]; border: st
             aria-hidden
             className="absolute inset-y-0 left-0 flex flex-col justify-center gap-[2px] px-sm whitespace-nowrap opacity-0 transition-opacity duration-100 group-hover:opacity-100 group-hover:delay-100 group-hover:duration-150 group-focus-visible:opacity-100 group-focus-visible:delay-100 group-focus-visible:duration-150 group-data-copied:opacity-100"
           >
-            <span className="text-caption font-medium">{s.name}</span>
-            <span data-hex className="inline-flex items-center gap-xxs font-mono text-[12px] select-text">
+            <span className="text-caption">{s.name}</span>
+            <span data-hex className="inline-flex items-center gap-xxs font-mono text-mono select-text">
               {copied === s.slug ? (
                 <>
                   <CheckIcon />

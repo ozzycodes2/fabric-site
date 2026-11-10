@@ -20,10 +20,10 @@ export function ThemesList({ ports }: { ports: Port[] }) {
               className="group flex h-full flex-col gap-lg rounded-lg border border-hairline bg-surface-1 p-lg hover:border-hairline-strong hover:bg-surface-2"
             >
               <span className="flex items-baseline justify-between gap-md">
-                <span className="text-subhead font-semibold text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-primary">
+                <span className="text-subhead text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-primary">
                   {p.name}
                 </span>
-                <span className="rounded-full border border-hairline-strong px-sm text-eyebrow leading-[22px] text-ink-muted">
+                <span className="rounded-full border border-hairline-strong px-sm py-xxs text-eyebrow text-ink-muted">
                   {p.category}
                 </span>
               </span>

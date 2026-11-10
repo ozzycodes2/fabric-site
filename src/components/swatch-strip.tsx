@@ -24,13 +24,13 @@ export function SwatchStrip({ palette, variant }: { palette: Palette; variant: V
       style={{ background: hex("canvas"), borderColor: hex("hairline") }}
     >
       <figcaption className="flex items-baseline justify-between text-caption" style={{ color: hex("ink-subtle") }}>
-        <span className="capitalize text-subhead font-semibold" style={{ color: hex("ink") }}>
+        <span className="capitalize text-subhead" style={{ color: hex("ink") }}>
           {variant}
         </span>
         <span>{meta?.id}</span>
       </figcaption>
       <div className="flex flex-col gap-sm rounded-md p-md" style={{ background: hex("surface-1") }}>
-        <span className="text-body font-medium" style={{ color: hex("ink") }}>
+        <span className="text-body" style={{ color: hex("ink") }}>
           Quiet grounds
         </span>
         <span className="text-caption" style={{ color: hex("ink-muted") }}>

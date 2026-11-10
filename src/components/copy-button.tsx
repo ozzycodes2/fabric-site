@@ -39,7 +39,7 @@ export function CopyButton({ value, label, text, showValue = true }: Props) {
       <code
         ref={ref}
         className={
-          !visible ? "sr-only" : showValue ? "font-mono text-[13px] whitespace-nowrap text-ink-muted" : "block w-full whitespace-pre font-mono text-mono text-ink-muted"
+          !visible ? "sr-only" : showValue ? "font-mono text-mono whitespace-nowrap text-ink-muted" : "block w-full whitespace-pre font-mono text-mono text-ink-muted"
         }
       >
         {value}

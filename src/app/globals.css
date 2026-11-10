@@ -106,10 +106,24 @@ html[data-variant="dawn"] {
   color-scheme: light;
 }
 
+/* Preflight's own stacks would otherwise apply to html and to code, kbd,
+   samp and pre. */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+  }
+}
+
 body {
   background: var(--canvas);
   color: var(--ink);
-  font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.65;
 }
@@ -140,8 +154,15 @@ body {
 
 html {
   scrollbar-color: var(--hairline-strong) var(--canvas);
-  /* Keeps anchors and focused controls clear of the sticky header. */
-  scroll-padding-top: 56px;
+  /* Keeps anchors and focused controls clear of the sticky header, which
+     wraps to two rows below 640px. */
+  scroll-padding-top: 100px;
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 56px;
+  }
 }
 
 /* The palette page renders both variants; show only the one the site is in.

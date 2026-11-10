@@ -11,6 +11,8 @@ import { groupRoles } from "@/lib/palette-groups";
 import { palette } from "@/lib/palette";
 import type { Port } from "@/lib/ports";
 import Home from "@/app/page";
+import TypographyPage from "@/app/typography/page";
+import { FAMILIES, STEPS } from "@/lib/typography";
 
 vi.mock("next/navigation", () => ({ usePathname: () => "/palette" }));
 
@@ -22,6 +24,20 @@ describe("home", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Color only where it signals." })).toBeTruthy();
     expect(container.querySelectorAll("figure")).toHaveLength(2);
     expect(screen.queryAllByRole("link")).toHaveLength(0);
+  });
+});
+
+describe("typography", () => {
+  it("shows both families and every step set in its own class", () => {
+    const { container } = render(<TypographyPage />);
+    expect(screen.getByRole("heading", { level: 1, name: "Typography" })).toBeTruthy();
+    for (const f of FAMILIES) expect(screen.getByRole("button", { name: `Copy ${f.name} font stack` })).toBeTruthy();
+    const rows = container.querySelectorAll("ol > li");
+    expect(rows).toHaveLength(STEPS.length);
+    STEPS.forEach((s, i) => {
+      expect(rows[i].textContent).toContain(`${s.size}px / ${s.weight} / ${s.lineHeight} / ${s.tracking}px`);
+      expect(rows[i].querySelector("p")!.className).toContain(s.className);
+    });
   });
 });
 
@@ -121,6 +137,7 @@ describe("chrome", () => {
       ["Home", "/"],
       ["Integrations", "/integrations"],
       ["Palette", "/palette"],
+      ["Typography", "/typography"],
     ]);
     expect(nav.querySelector("[aria-current=page]")!.textContent).toBe("Palette");
     expect(nav.querySelectorAll("[aria-current]")).toHaveLength(1);

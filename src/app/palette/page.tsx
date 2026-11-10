@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Palette · fabric" };
 export default function PalettePage() {
   return (
     <main className="mx-auto max-w-[960px] px-lg pt-xxl">
-      <h1 className="mb-xl text-[32px] leading-none font-semibold tracking-[-0.8px] sm:text-display">Palette</h1>
+      <h1 className="mb-xl text-display">Palette</h1>
       <PaletteView palette={palette} />
     </main>
   );
