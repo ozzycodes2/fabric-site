@@ -8,7 +8,6 @@ const link = "text-ink underline decoration-1 underline-offset-2";
 export default function Home() {
   const n = getPorts().length;
   const rows = [
-    { label: "Ghostty", href: "https://github.com/ozzycodes2/fabric-ghostty", right: "terminal", external: true },
     { label: "All integrations", href: "/themes", right: `${n} ${n === 1 ? "integration" : "integrations"}` },
     { label: "Palette", href: "/palette" },
   ];
@@ -33,15 +32,9 @@ export default function Home() {
       <ul className="m-0 list-none border-y border-hairline p-0">
         {rows.map((r) => (
           <li key={r.label} className="flex items-baseline justify-between border-b border-hairline py-sm text-body last:border-b-0">
-            {r.external ? (
-              <a href={r.href} className={link}>
-                {r.label}
-              </a>
-            ) : (
-              <Link href={r.href} className={link}>
-                {r.label}
-              </Link>
-            )}
+            <Link href={r.href} className={link}>
+              {r.label}
+            </Link>
             {r.right && <small className="text-caption text-ink-subtle">{r.right}</small>}
           </li>
         ))}

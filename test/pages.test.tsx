@@ -21,6 +21,7 @@ describe("home", () => {
     const paletteRow = screen.getByRole("link", { name: "Palette" }).closest("li")!;
     expect(paletteRow.querySelector("small")).toBeNull();
     expect(container.textContent).not.toMatch(/\bports?\b|roles/);
+    expect(screen.queryByRole("link", { name: "Ghostty" })).toBeNull();
   });
 });
 
