@@ -6,10 +6,10 @@ import { PaletteView } from "@/components/palette-view";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SwatchStrip } from "@/components/swatch-strip";
-import { ThemesList } from "@/components/themes-list";
+import { IntegrationsList } from "@/components/integrations-list";
 import { groupRoles } from "@/lib/palette-groups";
 import { palette } from "@/lib/palette";
-import type { Port } from "@/lib/ports";
+import type { Integration } from "@/lib/integrations";
 import Home from "@/app/page";
 import TypographyPage from "@/app/typography/page";
 import { FAMILIES, STEPS } from "@/lib/typography";
@@ -41,13 +41,13 @@ describe("typography", () => {
   });
 });
 
-const mk = (slug: string, name: string, category: string): Port => ({
+const mk = (slug: string, name: string, category: string): Integration => ({
   slug, name, category, type: "community", url: `https://x.test/${slug}`, tags: [], contributors: [],
 });
 
-describe("ThemesList", () => {
+describe("IntegrationsList", () => {
   it("filters by category", () => {
-    render(<ThemesList ports={[mk("a", "Alpha", "terminal"), mk("b", "Beta", "editor")]} />);
+    render(<IntegrationsList integrations={[mk("a", "Alpha", "terminal"), mk("b", "Beta", "editor")]} />);
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
     fireEvent.click(screen.getByRole("button", { name: "editor" }));
     expect(screen.getAllByRole("listitem")).toHaveLength(1);
@@ -58,7 +58,7 @@ describe("ThemesList", () => {
 
   it("credits the first contributor when there is one", () => {
     const withContributor = { ...mk("c", "Gamma", "terminal"), contributors: [{ name: "ada", url: "https://x.test/ada" }] };
-    render(<ThemesList ports={[withContributor, mk("d", "Delta", "terminal")]} />);
+    render(<IntegrationsList integrations={[withContributor, mk("d", "Delta", "terminal")]} />);
     expect(screen.getByText("by ada")).toBeTruthy();
     expect(screen.getAllByText(/^by /)).toHaveLength(1);
   });

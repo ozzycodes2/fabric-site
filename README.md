@@ -1,7 +1,7 @@
 # fabric-site
 
 The site for [Fabric](https://github.com/ozzycodes2/fabric-theme), a color
-theme in dusk and dawn: the themes directory, the palette and the port guides.
+theme in dusk and dawn: the themes directory, the palette and the integration guides.
 
 ## Develop
 
@@ -16,7 +16,7 @@ pnpm dev
 
 - `data/palette.json` is copied from a `fabric-theme` release tag; never edit
   it by hand.
-- `content/ports/*.json` lists the ports, one file per repo.
+- `content/integrations/*.json` lists the integrations, one file per repo.
 
 ## License
 

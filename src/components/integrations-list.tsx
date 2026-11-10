@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { Segmented } from "./segmented";
-import type { Port } from "@/lib/ports";
+import type { Integration } from "@/lib/integrations";
 
-export function ThemesList({ ports }: { ports: Port[] }) {
+export function IntegrationsList({ integrations }: { integrations: Integration[] }) {
   const [category, setCategory] = useState("all");
-  const categories = ["all", ...Array.from(new Set(ports.map((p) => p.category))).sort()];
-  const shown = category === "all" ? ports : ports.filter((p) => p.category === category);
+  const categories = ["all", ...Array.from(new Set(integrations.map((p) => p.category))).sort()];
+  const shown = category === "all" ? integrations : integrations.filter((p) => p.category === category);
 
   return (
     <div>
