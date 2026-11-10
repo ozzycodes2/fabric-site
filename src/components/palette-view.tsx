@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CopyButton } from "./copy-button";
+import { InfoTip } from "./info-tip";
 import { Segmented } from "./segmented";
 import { cssForVariant, formatColor, type ColorFormat } from "@/lib/color-format";
 import { groupRoles } from "@/lib/palette-groups";
@@ -13,18 +14,28 @@ type TileProps = { role: Role; variant: VariantSlug; format: ColorFormat; featur
 
 function Tile({ role, variant, format, featured }: TileProps) {
   return (
-    <li className="flex flex-col gap-sm">
+    <li className="flex min-w-0 flex-col gap-xs">
       <span
         aria-hidden
         className={featured ? "h-[160px] rounded-md border border-hairline" : "h-[88px] rounded-md border border-hairline"}
         style={{ background: role[variant].hex }}
       />
-      <span>
-        <span className="block text-body font-medium text-ink">{role.slug}</span>
-        <small className="block text-caption text-ink-subtle">{role.use}</small>
-      </span>
-      <CopyButton value={formatColor(role[variant], format)} label={`Copy ${role.slug} ${variant} ${format}`} />
+      <Details role={role} name={role.slug} variant={variant} format={format} />
     </li>
+  );
+}
+
+// Name with its usage note behind an info icon, then the value and copy icon,
+// each on one fixed-height line so tiles in a row stay aligned.
+function Details({ role, name, variant, format }: Omit<TileProps, "featured"> & { name: string }) {
+  return (
+    <>
+      <span className="relative flex items-center gap-xxs">
+        <span className="truncate text-body font-medium text-ink">{name}</span>
+        <InfoTip label={`About ${name}`} text={role.use} />
+      </span>
+      <CopyButton value={formatColor(role[variant], format)} label={`Copy ${name} ${variant} ${format}`} />
+    </>
   );
 }
 
@@ -36,11 +47,10 @@ function TermChip({ role, variant, format }: Omit<TileProps, "featured">) {
     <li className="flex min-w-0 flex-col gap-xs">
       <span
         aria-hidden
-        className="aspect-square rounded-sm border border-hairline"
+        className="h-[64px] rounded-sm border border-hairline"
         style={{ background: role[variant].hex }}
       />
-      <span className="text-caption break-words text-ink">{role.slug}</span>
-      <CopyButton value={formatColor(role[variant], format)} label={`Copy term-${role.slug} ${variant} ${format}`} />
+      <Details role={role} name={role.slug} variant={variant} format={format} />
     </li>
   );
 }
@@ -91,7 +101,7 @@ export function PaletteView({ palette }: { palette: Palette }) {
             <CopyButton
               value={cssForVariant(palette, v.slug)}
               label={`Copy CSS for ${v.slug}`}
-              text="Copy CSS"
+              text="CSS"
               showValue={false}
             />
           </div>
@@ -111,7 +121,7 @@ export function PaletteView({ palette }: { palette: Palette }) {
             <h3 className="mb-md text-subhead font-semibold text-ink">Terminal</h3>
             <TerminalSample palette={palette} variant={v.slug} />
             {[normal, bright].map((row, i) => (
-              <ul key={i} className="m-0 mt-lg grid list-none grid-cols-4 gap-x-md gap-y-lg p-0 sm:grid-cols-8">
+              <ul key={i} className="m-0 mt-lg grid list-none grid-cols-2 gap-x-md gap-y-lg p-0 sm:grid-cols-4">
                 {row.map((r) => (
                   <TermChip key={r.slug} role={r} variant={v.slug} format={format} />
                 ))}

@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { InfoTip } from "@/components/info-tip";
 import { PaletteView } from "@/components/palette-view";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -68,6 +69,32 @@ describe("PaletteView", () => {
     const canvas = palette.ui.find((r) => r.slug === "canvas")!.dawn.rgb.join(", ");
     expect(dawn.style.background).toBe(`rgb(${canvas})`);
     expect(dawn.textContent).toContain("git status");
+  });
+
+  it("puts each role's usage note behind an info tip", () => {
+    render(<PaletteView palette={palette} />);
+    const primary = palette.ui.find((r) => r.slug === "primary")!;
+    expect(screen.getAllByRole("button", { name: "About primary" })).toHaveLength(2);
+    expect(screen.getAllByRole("tooltip").filter((t) => t.textContent === primary.use)).toHaveLength(2);
+  });
+});
+
+describe("InfoTip", () => {
+  it("describes its button and hides on Escape until the pointer or focus leaves", () => {
+    render(<InfoTip label="About primary" text="Accent fill" />);
+    const button = screen.getByRole("button", { name: "About primary" });
+    const tip = screen.getByRole("tooltip");
+    expect(button.getAttribute("aria-describedby")).toBe(tip.id);
+    expect(tip.textContent).toBe("Accent fill");
+    fireEvent.keyDown(button, { key: "Enter" });
+    expect(tip.dataset.dismissed).toBeUndefined();
+    fireEvent.keyDown(button, { key: "Escape" });
+    expect(tip.dataset.dismissed).toBe("true");
+    fireEvent.mouseLeave(button.parentElement!);
+    expect(tip.dataset.dismissed).toBeUndefined();
+    fireEvent.keyDown(button, { key: "Escape" });
+    fireEvent.blur(button);
+    expect(tip.dataset.dismissed).toBeUndefined();
   });
 });
 

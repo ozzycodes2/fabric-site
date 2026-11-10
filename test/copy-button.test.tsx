@@ -10,6 +10,8 @@ afterEach(() => {
   window.getSelection()?.removeAllRanges();
 });
 
+const icon = (b: HTMLElement) => b.querySelector("svg")?.dataset.icon;
+
 function setup(writeText?: () => Promise<void>, props: { showValue?: boolean; text?: string } = {}) {
   vi.stubGlobal("navigator", writeText ? { clipboard: { writeText } } : {});
   const utils = render(<CopyButton value="#ef6306" label="Copy primary" {...props} />);
@@ -17,7 +19,7 @@ function setup(writeText?: () => Promise<void>, props: { showValue?: boolean; te
 }
 
 describe("CopyButton", () => {
-  it("shows Copied, announces it, then resets after 1500ms", async () => {
+  it("swaps to a check icon, announces Copied, then resets after 1500ms", async () => {
     vi.useFakeTimers();
     const writeText = vi.fn().mockResolvedValue(undefined);
     const { button } = setup(writeText);
@@ -25,12 +27,12 @@ describe("CopyButton", () => {
       fireEvent.click(button);
     });
     expect(writeText).toHaveBeenCalledWith("#ef6306");
-    expect(button.textContent).toBe("Copied");
+    expect(icon(button)).toBe("check");
     expect(screen.getByRole("status").textContent).toBe("Copied");
     act(() => {
       vi.advanceTimersByTime(1500);
     });
-    expect(button.textContent).toBe("Copy");
+    expect(icon(button)).toBe("copy");
     expect(screen.getByRole("status").textContent).toBe("");
   });
 
@@ -49,11 +51,11 @@ describe("CopyButton", () => {
     act(() => {
       vi.advanceTimersByTime(1000);
     });
-    expect(button.textContent).toBe("Copied");
+    expect(icon(button)).toBe("check");
     act(() => {
       vi.advanceTimersByTime(500);
     });
-    expect(button.textContent).toBe("Copy");
+    expect(icon(button)).toBe("copy");
   });
 
   it("clears the timer on unmount", async () => {
@@ -91,8 +93,14 @@ describe("CopyButton", () => {
     vi.spyOn(window, "getSelection").mockReturnValue(null);
     const { button } = setup();
     fireEvent.click(button);
-    expect(button.textContent).toBe("Copy");
+    expect(icon(button)).toBe("copy");
     vi.restoreAllMocks();
+  });
+
+  it("is icon-only without text", () => {
+    const { button } = setup();
+    expect(button.textContent).toBe("");
+    expect(button.getAttribute("title")).toBe("Copy primary");
   });
 
   it("shows the value, or hides it visually when asked", () => {
@@ -101,5 +109,6 @@ describe("CopyButton", () => {
     rerender(<CopyButton value="#ef6306" label="x" showValue={false} text="Copy CSS" />);
     expect(container.querySelector("code")?.className).toContain("sr-only");
     expect(screen.getByRole("button").textContent).toBe("Copy CSS");
+    expect(icon(screen.getByRole("button"))).toBe("copy");
   });
 });
