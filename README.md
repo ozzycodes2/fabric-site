@@ -1,6 +1,6 @@
 # fabric-site
 
-The site for [Fabric](https://github.com/ozzycodes2/fabric-theme), a colour
+The site for [Fabric](https://github.com/ozzycodes2/fabric-theme), a color
 theme in dusk and dawn: the themes directory, the palette and the port guides.
 
 ## Develop

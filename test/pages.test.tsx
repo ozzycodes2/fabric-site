@@ -19,7 +19,7 @@ afterEach(cleanup);
 describe("home", () => {
   it("shows the statement and both swatch strips with no link rows", () => {
     const { container } = render(<Home />);
-    expect(screen.getByRole("heading", { level: 1, name: "Colour only where it signals." })).toBeTruthy();
+    expect(screen.getByRole("heading", { level: 1, name: "Color only where it signals." })).toBeTruthy();
     expect(container.querySelectorAll("figure")).toHaveLength(2);
     expect(screen.queryAllByRole("link")).toHaveLength(0);
   });
@@ -49,7 +49,7 @@ describe("ThemesList", () => {
 });
 
 describe("PaletteView", () => {
-  it("switches colour format and offers Copy CSS per variant", () => {
+  it("switches color format and offers Copy CSS per variant", () => {
     render(<PaletteView palette={palette} />);
     expect(screen.getAllByText("#ef6306").length).toBeGreaterThan(0);
     fireEvent.click(screen.getByRole("button", { name: "rgb" }));
@@ -63,7 +63,7 @@ describe("PaletteView", () => {
     expect(Array.from(container.querySelectorAll("section")).map((s) => s.dataset.show)).toEqual(["dusk", "dawn"]);
   });
 
-  it("paints a terminal sample in each variant's own colours", () => {
+  it("paints a terminal sample in each variant's own colors", () => {
     render(<PaletteView palette={palette} />);
     const dawn = screen.getByLabelText("Terminal sample in dawn");
     const canvas = palette.ui.find((r) => r.slug === "canvas")!.dawn.rgb.join(", ");

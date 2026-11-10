@@ -55,7 +55,7 @@ function TermChip({ role, variant, format }: Omit<TileProps, "featured">) {
   );
 }
 
-// A short shell session painted in the variant's own colours, so the terminal
+// A short shell session painted in the variant's own colors, so the terminal
 // palette is seen in use rather than only as chips.
 function TerminalSample({ palette, variant }: { palette: Palette; variant: VariantSlug }) {
   const hex = (roles: Role[], slug: string) => roles.find((r) => r.slug === slug)?.[variant].hex;
@@ -86,7 +86,7 @@ export function PaletteView({ palette }: { palette: Palette }) {
 
   return (
     <div>
-      <Segmented label="Colour format" options={FORMATS} value={format} onChange={setFormat} />
+      <Segmented label="Color format" options={FORMATS} value={format} onChange={setFormat} />
       {palette.variants.map((v) => (
         <section key={v.slug} data-show={v.slug} aria-labelledby={`v-${v.slug}`} className="mt-xxl">
           <div className="flex flex-wrap items-end justify-between gap-md border-b border-hairline pb-md">

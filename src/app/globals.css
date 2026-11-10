@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Colour custom properties (--canvas, --ink, --term-*) are generated from
+/* Color custom properties (--canvas, --ink, --term-*) are generated from
    data/palette.json by tokensCss() and injected in layout.tsx. */
 
 @theme inline {
@@ -141,7 +141,7 @@ html {
 }
 
 /* The palette page renders both variants; show only the one the site is in.
-   Mirrors the selector order tokensCss() uses for the colour tokens. */
+   Mirrors the selector order tokensCss() uses for the color tokens. */
 [data-show="dawn"],
 html[data-variant="dawn"] [data-show="dusk"] {
   display: none;

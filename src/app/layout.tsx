@@ -15,7 +15,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "fabric",
-  description: "A colour theme in two variants, dusk and dawn.",
+  description: "A color theme in two variants, dusk and dawn.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
