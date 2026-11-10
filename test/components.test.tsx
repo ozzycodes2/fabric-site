@@ -37,7 +37,7 @@ describe("VariantToggle", () => {
     expect(icon("dusk").dataset.icon).toBe("sunset");
     expect(icon("dawn").dataset.icon).toBe("sunrise");
     expect(icon("dusk").getAttribute("aria-hidden")).toBe("true");
-    expect(icon("dawn").getAttribute("class")).toContain("stroke-primary");
+    expect(icon("dawn").getAttribute("class")).toContain("stroke-current");
     expect(screen.getByRole("group", { name: "Variant" }).textContent).toBe("");
   });
 

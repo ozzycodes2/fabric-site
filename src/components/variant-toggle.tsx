@@ -5,7 +5,9 @@ import type { VariantSlug } from "@/lib/palette";
 
 const VARIANTS: VariantSlug[] = ["dusk", "dawn"];
 
-// A sun on the horizon; the arrow points down at dusk (sunset) and up at dawn (sunrise).
+// A sun on the horizon; the arrow points down at dusk (sunset) and up at dawn
+// (sunrise). Drawn in ink, not the accent: on dawn the accent reads 2.96:1,
+// under the 3:1 an icon needs when it alone identifies the control.
 function HorizonIcon({ variant }: { variant: VariantSlug }) {
   return (
     <svg
@@ -14,7 +16,7 @@ function HorizonIcon({ variant }: { variant: VariantSlug }) {
       width="16"
       height="16"
       fill="none"
-      className="stroke-primary"
+      className="stroke-current"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -60,7 +62,7 @@ export function VariantToggle() {
           aria-label={v}
           title={v}
           onClick={() => choose(v)}
-          className="inline-flex min-h-[32px] items-center rounded-full px-xs sm:px-sm aria-pressed:bg-surface-3"
+          className="inline-flex min-h-[32px] items-center rounded-full px-xs text-ink-subtle sm:px-sm hover:text-ink aria-pressed:bg-surface-3 aria-pressed:text-ink"
         >
           <HorizonIcon variant={v} />
         </button>
