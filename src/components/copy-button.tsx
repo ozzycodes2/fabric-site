@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useCopy } from "@/lib/use-copy";
 import { CheckIcon, CopyIcon } from "./icons";
 
 type Props = {
@@ -13,11 +14,9 @@ type Props = {
 // Icon-only unless `text` is given, which then sits beside the icon.
 export function CopyButton({ value, label, text, showValue = true }: Props) {
   const ref = useRef<HTMLElement>(null);
-  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const [copied, setCopied] = useState(false);
+  const { copied: key, copy: write } = useCopy();
+  const copied = key !== null;
   const [failed, setFailed] = useState(false);
-
-  useEffect(() => () => clearTimeout(timer.current), []);
 
   // Fallback when the Clipboard API is unavailable or refused: reveal the
   // value and select it so the reader can copy it by hand.
@@ -31,16 +30,7 @@ export function CopyButton({ value, label, text, showValue = true }: Props) {
   }, [failed]);
 
   async function copy() {
-    clearTimeout(timer.current);
-    try {
-      await navigator.clipboard.writeText(value);
-      setFailed(false);
-      setCopied(true);
-      timer.current = setTimeout(() => setCopied(false), 1500);
-    } catch {
-      setCopied(false);
-      setFailed(true);
-    }
+    setFailed(!(await write(value)));
   }
 
   const visible = showValue || failed;

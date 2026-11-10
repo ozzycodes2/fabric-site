@@ -122,6 +122,10 @@ body {
       color 150ms ease,
       background-color 150ms ease;
   }
+
+  [data-swatch] {
+    transition: flex-grow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
 }
 
 ::selection {

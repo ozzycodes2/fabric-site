@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cssForVariant, formatColor } from "@/lib/color-format";
+import { contrast, cssForVariant, formatColor } from "@/lib/color-format";
 import { palette } from "@/lib/palette";
 
 const accent = palette.ui.find((r) => r.slug === "primary")!.dusk;
@@ -19,5 +19,15 @@ describe("cssForVariant", () => {
     expect(css).toContain("--primary: #ef6306;");
     expect(css).toContain("--term-red:");
     expect(css).not.toContain("--canvas: #010102");
+  });
+});
+
+describe("contrast", () => {
+  it("matches WCAG for black on white, in either order", () => {
+    const black = { ...accent, rgb: [0, 0, 0] as [number, number, number] };
+    const white = { ...accent, rgb: [255, 255, 255] as [number, number, number] };
+    expect(contrast(black, white)).toBeCloseTo(21);
+    expect(contrast(white, black)).toBeCloseTo(21);
+    expect(contrast(accent, accent)).toBe(1);
   });
 });

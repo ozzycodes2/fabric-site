@@ -81,10 +81,10 @@ describe("CopyButton", () => {
     expect(screen.queryByText("Copied")).toBeNull();
   });
 
-  it("reveals and selects the value when the clipboard API is absent", () => {
+  it("reveals and selects the value when the clipboard API is absent", async () => {
     const { button, container } = setup(undefined, { showValue: false });
     fireEvent.click(button);
-    expect(window.getSelection()?.toString()).toBe("#ef6306");
+    await waitFor(() => expect(window.getSelection()?.toString()).toBe("#ef6306"));
     expect(container.querySelector("code")?.className).not.toContain("sr-only");
     expect(screen.queryByText("Copied")).toBeNull();
   });

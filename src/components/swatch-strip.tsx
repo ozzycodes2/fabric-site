@@ -1,4 +1,6 @@
+import { contrast } from "@/lib/color-format";
 import type { Palette, VariantSlug } from "@/lib/palette";
+import { type Swatch, SwatchBar } from "./swatch-bar";
 
 export const STRIP_SLUGS = ["canvas", "surface-1", "surface-3", "ink-subtle", "ink-muted", "ink", "primary"];
 
@@ -6,8 +8,16 @@ export const STRIP_SLUGS = ["canvas", "surface-1", "surface-3", "ink-subtle", "i
 // both variants show side by side whichever one the site is in.
 export function SwatchStrip({ palette, variant }: { palette: Palette; variant: VariantSlug }) {
   const meta = palette.variants.find((v) => v.slug === variant);
-  const hex = (slug: string) => palette.ui.find((r) => r.slug === slug)?.[variant].hex;
-  const roles = STRIP_SLUGS.map((s) => palette.ui.find((r) => r.slug === s)).filter((r) => !!r);
+  const color = (slug: string) => palette.ui.find((r) => r.slug === slug)![variant];
+  const hex = (slug: string) => color(slug).hex;
+  // Each label takes whichever of ink or canvas reads better on its segment.
+  const swatches: Swatch[] = STRIP_SLUGS.map((s) => palette.ui.find((r) => r.slug === s))
+    .filter((r) => !!r)
+    .map((r) => {
+      const c = r[variant];
+      const ink = [color("ink"), color("canvas")].sort((a, b) => contrast(b, c) - contrast(a, c))[0];
+      return { slug: r.slug, name: r.name, hex: c.hex, ink: ink.hex };
+    });
   return (
     <figure
       className="m-0 flex flex-col gap-lg rounded-lg border p-lg"
@@ -34,11 +44,7 @@ export function SwatchStrip({ palette, variant }: { palette: Palette; variant: V
           Primary
         </span>
       </div>
-      <div className="flex h-[40px] overflow-hidden rounded-sm border" style={{ borderColor: hex("hairline") }}>
-        {roles.map((r) => (
-          <span key={r.slug} title={r.name} className="flex-1" style={{ background: r[variant].hex }} />
-        ))}
-      </div>
+      <SwatchBar swatches={swatches} border={hex("hairline")} />
     </figure>
   );
 }

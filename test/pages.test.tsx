@@ -125,7 +125,7 @@ describe("chrome", () => {
     expect(nav.querySelector("[aria-current=page]")!.textContent).toBe("Palette");
     expect(nav.querySelectorAll("[aria-current]")).toHaveLength(1);
     expect(screen.getByRole("link", { name: "Submit an integration" })).toBeTruthy();
-    expect(container.querySelectorAll("figure span[title]")).toHaveLength(7);
+    expect(container.querySelectorAll("figure button[data-swatch]")).toHaveLength(7);
     expect(container.querySelector("figcaption span")!.className).toContain("capitalize");
     expect(screen.getByText("fabric-dawn")).toBeTruthy();
   });
