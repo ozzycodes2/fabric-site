@@ -1,0 +1,8 @@
+{
+  "type": "official",
+  "name": "Ghostty",
+  "url": "https://github.com/ozzycodes2/fabric-ghostty",
+  "category": "terminal",
+  "tags": ["ghostty"],
+  "contributors": [{ "name": "ozzycodes2", "url": "https://github.com/ozzycodes2" }]
+}

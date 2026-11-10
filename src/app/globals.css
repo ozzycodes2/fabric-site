@@ -89,7 +89,21 @@
 }
 
 html {
-  color-scheme: dark light;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-variant]) {
+    color-scheme: light;
+  }
+}
+
+html[data-variant="dusk"] {
+  color-scheme: dark;
+}
+
+html[data-variant="dawn"] {
+  color-scheme: light;
 }
 
 body {
@@ -106,7 +120,6 @@ body {
   button {
     transition:
       color 150ms ease,
-      background-color 150ms ease,
-      border-color 150ms ease;
+      background-color 150ms ease;
   }
 }

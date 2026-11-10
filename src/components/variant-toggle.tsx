@@ -28,14 +28,14 @@ export function VariantToggle() {
   }
 
   return (
-    <div role="group" aria-label="Variant" className="inline-flex gap-xs">
+    <div role="group" aria-label="Variant" className="inline-flex rounded-full border border-hairline p-[2px]">
       {VARIANTS.map((v) => (
         <button
           key={v}
           type="button"
           aria-pressed={active === v}
           onClick={() => choose(v)}
-          className="rounded-full border border-hairline-strong px-md py-xs text-caption text-ink-muted aria-pressed:bg-surface-3 aria-pressed:text-ink"
+          className="rounded-full px-sm py-xxs text-eyebrow font-medium text-ink-muted aria-pressed:bg-surface-2 aria-pressed:text-ink"
         >
           {v}
         </button>
