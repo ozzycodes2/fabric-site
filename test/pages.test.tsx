@@ -14,14 +14,11 @@ import Home from "@/app/page";
 afterEach(cleanup);
 
 describe("home", () => {
-  it("lists integrations and leaves the palette row without counts", () => {
+  it("shows the statement and both swatch strips with no link rows", () => {
     const { container } = render(<Home />);
-    expect(screen.getByRole("link", { name: "All integrations" }).getAttribute("href")).toBe("/themes");
-    expect(screen.getByText("1 integration")).toBeTruthy();
-    const paletteRow = screen.getByRole("link", { name: "Palette" }).closest("li")!;
-    expect(paletteRow.querySelector("small")).toBeNull();
-    expect(container.textContent).not.toMatch(/\bports?\b|roles/);
-    expect(screen.queryByRole("link", { name: "Ghostty" })).toBeNull();
+    expect(screen.getByRole("heading", { level: 1, name: "Colour only where it signals." })).toBeTruthy();
+    expect(container.querySelectorAll("figure")).toHaveLength(2);
+    expect(screen.queryAllByRole("link")).toHaveLength(0);
   });
 });
 
