@@ -78,3 +78,15 @@ describe("SwatchStrip labels", () => {
     expect(label(/^Copy Ink #/)).toBe(hexToRgb(ink("dusk", "canvas")));
   });
 });
+
+describe("SwatchStrip primary button", () => {
+  it("carries the variant's primary fills for rest, hover and press", () => {
+    const fill = (slug: string) => palette.ui.find((r) => r.slug === slug)!.dawn.hex;
+    render(<SwatchStrip palette={palette} variant="dawn" />);
+    const b = screen.getByRole("button", { name: "Primary" });
+    expect(b.style.getPropertyValue("--fill")).toBe(fill("primary"));
+    expect(b.style.getPropertyValue("--fill-hover")).toBe(fill("primary-hover"));
+    expect(b.style.getPropertyValue("--fill-press")).toBe(fill("primary-focus"));
+    expect(b.className).toMatch(/hover:bg-\(--fill-hover\).*active:bg-\(--fill-press\)/);
+  });
+});

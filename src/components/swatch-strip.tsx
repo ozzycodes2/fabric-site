@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { contrast } from "@/lib/color-format";
 import type { Palette, VariantSlug } from "@/lib/palette";
 import { type Swatch, SwatchBar } from "./swatch-bar";
@@ -36,13 +37,23 @@ export function SwatchStrip({ palette, variant }: { palette: Palette; variant: V
         <span className="text-caption" style={{ color: hex("ink-muted") }}>
           Text steps down in three inks; the orange is kept for the one thing to act on.
         </span>
-        <span
-          aria-hidden
-          className="mt-xs inline-flex w-fit rounded-full px-md py-xxs text-caption"
-          style={{ background: hex("primary"), color: hex("on-primary") }}
+        {/* A live sample of the primary states: brighter on hover, deepest
+            while pressed or focused. */}
+        <button
+          type="button"
+          className="mt-xs inline-flex w-fit rounded-full bg-(--fill) px-md py-xxs text-caption hover:bg-(--fill-hover) focus-visible:bg-(--fill-press) active:bg-(--fill-press)"
+          style={
+            {
+              "--fill": hex("primary"),
+              "--fill-hover": hex("primary-hover"),
+              "--fill-press": hex("primary-focus"),
+              color: hex("on-primary"),
+              outlineColor: hex("primary-focus"),
+            } as CSSProperties
+          }
         >
           Primary
-        </span>
+        </button>
       </div>
       <SwatchBar swatches={swatches} border={hex("hairline")} />
     </figure>
