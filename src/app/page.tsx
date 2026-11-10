@@ -9,8 +9,8 @@ export default function Home() {
   const n = getPorts().length;
   const rows = [
     { label: "Ghostty", href: "https://github.com/ozzycodes2/fabric-ghostty", right: "terminal", external: true },
-    { label: "All themes", href: "/themes", right: `${n} ${n === 1 ? "port" : "ports"}` },
-    { label: "Palette", href: "/palette", right: `${palette.ui.length} roles · ${palette.terminal.length} terminal` },
+    { label: "All integrations", href: "/themes", right: `${n} ${n === 1 ? "integration" : "integrations"}` },
+    { label: "Palette", href: "/palette" },
   ];
 
   return (
@@ -42,7 +42,7 @@ export default function Home() {
                 {r.label}
               </Link>
             )}
-            <small className="text-caption text-ink-subtle">{r.right}</small>
+            {r.right && <small className="text-caption text-ink-subtle">{r.right}</small>}
           </li>
         ))}
       </ul>

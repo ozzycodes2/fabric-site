@@ -5,6 +5,29 @@ import type { VariantSlug } from "@/lib/palette";
 
 const VARIANTS: VariantSlug[] = ["dusk", "dawn"];
 
+// A sun on the horizon; the arrow points down at dusk (sunset) and up at dawn (sunrise).
+function HorizonIcon({ variant }: { variant: VariantSlug }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      width="14"
+      height="14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      data-icon={variant === "dusk" ? "sunset" : "sunrise"}
+    >
+      <path d="M17 18a5 5 0 0 0-10 0" />
+      <path d="M12 2v7" />
+      <path d={variant === "dusk" ? "m16 5-4 4-4-4" : "m8 6 4-4 4 4"} />
+      <path d="m4.2 10.2 1.4 1.4M1 18h2M21 18h2M18.4 11.6l1.4-1.4M23 22H1" />
+    </svg>
+  );
+}
+
 function current(): VariantSlug {
   const set = document.documentElement.dataset.variant;
   if (set === "dusk" || set === "dawn") return set;
@@ -35,8 +58,9 @@ export function VariantToggle() {
           type="button"
           aria-pressed={active === v}
           onClick={() => choose(v)}
-          className="rounded-full px-sm py-xxs text-eyebrow font-medium text-ink-muted aria-pressed:bg-surface-2 aria-pressed:text-ink"
+          className="inline-flex items-center gap-xxs rounded-full px-sm py-xxs text-eyebrow font-medium text-ink-muted aria-pressed:bg-surface-2 aria-pressed:text-ink"
         >
+          <HorizonIcon variant={v} />
           {v}
         </button>
       ))}

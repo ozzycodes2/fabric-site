@@ -25,9 +25,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <style dangerouslySetInnerHTML={{ __html: tokensCss(palette) }} />
         <VariantScript />
       </head>
-      <body>
+      <body className="flex min-h-dvh flex-col">
         <SiteHeader />
-        {children}
+        <div className="flex-1">{children}</div>
         <SiteFooter />
       </body>
     </html>

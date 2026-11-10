@@ -9,8 +9,20 @@ import { ThemesList } from "@/components/themes-list";
 import { groupRoles } from "@/lib/palette-groups";
 import { palette } from "@/lib/palette";
 import type { Port } from "@/lib/ports";
+import Home from "@/app/page";
 
 afterEach(cleanup);
+
+describe("home", () => {
+  it("lists integrations and leaves the palette row without counts", () => {
+    const { container } = render(<Home />);
+    expect(screen.getByRole("link", { name: "All integrations" }).getAttribute("href")).toBe("/themes");
+    expect(screen.getByText("1 integration")).toBeTruthy();
+    const paletteRow = screen.getByRole("link", { name: "Palette" }).closest("li")!;
+    expect(paletteRow.querySelector("small")).toBeNull();
+    expect(container.textContent).not.toMatch(/\bports?\b|roles/);
+  });
+});
 
 const mk = (slug: string, name: string, category: string): Port => ({
   slug, name, category, type: "community", url: `https://x.test/${slug}`, tags: [], contributors: [],
@@ -58,7 +70,7 @@ describe("chrome", () => {
       </>,
     );
     expect(screen.getByRole("link", { name: "Palette" }).getAttribute("href")).toBe("/palette");
-    expect(screen.getByRole("link", { name: "Submit a port" })).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Submit an integration" })).toBeTruthy();
     expect(container.querySelectorAll("figure span[title]")).toHaveLength(7);
     expect(container.querySelector("figcaption span")!.className).toContain("capitalize");
     expect(screen.getByText("fabric-dawn")).toBeTruthy();

@@ -1,6 +1,6 @@
 const LINKS = [
   { href: "https://github.com/ozzycodes2/fabric-theme", label: "GitHub" },
-  { href: "https://github.com/ozzycodes2/fabric-site/issues", label: "Submit a port" },
+  { href: "https://github.com/ozzycodes2/fabric-site/issues", label: "Submit an integration" },
 ];
 
 export function SiteFooter() {

@@ -31,6 +31,14 @@ describe("VariantToggle", () => {
     expect(localStorage.getItem("fabric-variant")).toBe("dusk");
   });
 
+  it("marks dusk with a sunset icon and dawn with a sunrise icon, hidden from assistive tech", () => {
+    render(<VariantToggle />);
+    const icon = (name: string) => screen.getByRole("button", { name }).querySelector("svg")!;
+    expect(icon("dusk").dataset.icon).toBe("sunset");
+    expect(icon("dawn").dataset.icon).toBe("sunrise");
+    expect(icon("dusk").getAttribute("aria-hidden")).toBe("true");
+  });
+
   it("reflects the variant already on <html>", () => {
     document.documentElement.dataset.variant = "dawn";
     render(<VariantToggle />);
