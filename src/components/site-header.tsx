@@ -3,7 +3,7 @@ import { VariantToggle } from "./variant-toggle";
 
 const NAV = [
   { href: "/", label: "Home" },
-  { href: "/themes", label: "Themes" },
+  { href: "/integrations", label: "Integrations" },
   { href: "/palette", label: "Palette" },
 ];
 

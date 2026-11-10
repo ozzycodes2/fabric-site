@@ -38,6 +38,7 @@ describe("VariantToggle", () => {
     expect(icon("dawn").dataset.icon).toBe("sunrise");
     expect(icon("dusk").getAttribute("aria-hidden")).toBe("true");
     expect(icon("dawn").getAttribute("class")).toContain("stroke-primary");
+    expect(screen.getByRole("group", { name: "Variant" }).textContent).toBe("");
   });
 
   it("reflects the variant already on <html>", () => {

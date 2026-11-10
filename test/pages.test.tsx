@@ -67,7 +67,12 @@ describe("chrome", () => {
         <SiteFooter />
       </>,
     );
-    expect(screen.getByRole("link", { name: "Palette" }).getAttribute("href")).toBe("/palette");
+    const nav = screen.getByRole("navigation", { name: "Primary" });
+    expect(Array.from(nav.querySelectorAll("a")).map((a) => [a.textContent, a.getAttribute("href")])).toEqual([
+      ["Home", "/"],
+      ["Integrations", "/integrations"],
+      ["Palette", "/palette"],
+    ]);
     expect(screen.getByRole("link", { name: "Submit an integration" })).toBeTruthy();
     expect(container.querySelectorAll("figure span[title]")).toHaveLength(7);
     expect(container.querySelector("figcaption span")!.className).toContain("capitalize");

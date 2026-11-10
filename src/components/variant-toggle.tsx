@@ -11,8 +11,8 @@ function HorizonIcon({ variant }: { variant: VariantSlug }) {
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      width="14"
-      height="14"
+      width="16"
+      height="16"
       fill="none"
       className="stroke-primary"
       strokeWidth="2"
@@ -57,11 +57,12 @@ export function VariantToggle() {
           key={v}
           type="button"
           aria-pressed={active === v}
+          aria-label={v}
+          title={v}
           onClick={() => choose(v)}
-          className="inline-flex items-center gap-xxs rounded-full px-sm py-xxs text-eyebrow font-medium text-ink-muted aria-pressed:bg-surface-2 aria-pressed:text-ink"
+          className="inline-flex items-center rounded-full px-xs py-xxs aria-pressed:bg-surface-2"
         >
           <HorizonIcon variant={v} />
-          {v}
         </button>
       ))}
     </div>
