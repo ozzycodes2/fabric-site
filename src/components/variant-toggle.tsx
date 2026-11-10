@@ -14,7 +14,7 @@ function HorizonIcon({ variant }: { variant: VariantSlug }) {
       width="14"
       height="14"
       fill="none"
-      stroke="currentColor"
+      className="stroke-primary"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
