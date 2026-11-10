@@ -136,6 +136,8 @@ body {
 
 html {
   scrollbar-color: var(--hairline-strong) var(--canvas);
+  /* Keeps anchors and focused controls clear of the sticky header. */
+  scroll-padding-top: 56px;
 }
 
 /* The palette page renders both variants; show only the one the site is in.

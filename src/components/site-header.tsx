@@ -4,7 +4,7 @@ import { VariantToggle } from "./variant-toggle";
 
 export function SiteHeader() {
   return (
-    <header className="flex h-[56px] items-center justify-between border-b border-hairline px-md sm:px-lg">
+    <header className="sticky top-0 z-20 flex h-[56px] items-center justify-between border-b border-hairline bg-canvas px-md sm:px-lg">
       <div className="flex items-center gap-sm sm:gap-lg">
         <Link href="/" className="inline-flex items-center gap-xxs text-[15px] font-semibold tracking-[-0.2px] text-ink">
           fabric
