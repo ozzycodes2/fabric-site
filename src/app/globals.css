@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/* Colour custom properties (--canvas, --ink, --term-*) are generated from
+   data/palette.json by tokensCss() and injected in layout.tsx. */
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-focus: var(--primary-focus);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-canvas: var(--canvas);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-hairline-tertiary: var(--hairline-tertiary);
+  --color-inverse-canvas: var(--inverse-canvas);
+  --color-inverse-ink: var(--inverse-ink);
+
+  --color-term-black: var(--term-black);
+  --color-term-red: var(--term-red);
+  --color-term-green: var(--term-green);
+  --color-term-yellow: var(--term-yellow);
+  --color-term-blue: var(--term-blue);
+  --color-term-magenta: var(--term-magenta);
+  --color-term-cyan: var(--term-cyan);
+  --color-term-white: var(--term-white);
+  --color-term-bright-black: var(--term-bright-black);
+  --color-term-bright-red: var(--term-bright-red);
+  --color-term-bright-green: var(--term-bright-green);
+  --color-term-bright-yellow: var(--term-bright-yellow);
+  --color-term-bright-blue: var(--term-bright-blue);
+  --color-term-bright-magenta: var(--term-bright-magenta);
+  --color-term-bright-cyan: var(--term-bright-cyan);
+  --color-term-bright-white: var(--term-bright-white);
+
+  --radius-none: 0px;
+  --radius-xs: 5px;
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 17px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-section: 80px;
+
+  --font-sans: var(--font-inter), "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-display: 40px;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.8px;
+  --text-display--font-weight: 600;
+  --text-headline: 32px;
+  --text-headline--line-height: 1.1;
+  --text-headline--letter-spacing: -0.8px;
+  --text-headline--font-weight: 600;
+  --text-heading: 28px;
+  --text-heading--line-height: 1.3;
+  --text-heading--letter-spacing: -0.2px;
+  --text-heading--font-weight: 600;
+  --text-subhead: 20px;
+  --text-subhead--line-height: 1.5;
+  --text-subhead--font-weight: 400;
+  --text-body: 16px;
+  --text-body--line-height: 1.65;
+  --text-body--font-weight: 400;
+  --text-caption: 14px;
+  --text-caption--line-height: 1.45;
+  --text-caption--font-weight: 500;
+  --text-eyebrow: 12px;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.5px;
+  --text-eyebrow--font-weight: 500;
+  --text-mono: 14px;
+  --text-mono--line-height: 1.6;
+  --text-mono--font-weight: 400;
+}
+
+html {
+  color-scheme: dark light;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body,
+  button {
+    transition:
+      color 150ms ease,
+      background-color 150ms ease,
+      border-color 150ms ease;
+  }
+}
