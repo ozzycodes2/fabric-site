@@ -17,7 +17,7 @@ describe("tokensCss", () => {
   });
 
   it("declares dawn values in the dawn block", () => {
-    expect(block('[data-variant="dawn"]')).toContain("--canvas: #f8f8f8");
+    expect(block('[data-variant="dawn"]')).toContain("--canvas: #f4f4f4");
   });
 
   it("emits terminal custom properties", () => {
@@ -31,7 +31,7 @@ describe("tokensCss", () => {
     expect(media).toBeGreaterThanOrEqual(0);
     const after = css.slice(media);
     expect(after).toContain(":root:not([data-variant])");
-    expect(after).toContain("--canvas: #f8f8f8");
+    expect(after).toContain("--canvas: #f4f4f4");
   });
 
   it("puts explicit variant blocks after the media query so they override it", () => {
