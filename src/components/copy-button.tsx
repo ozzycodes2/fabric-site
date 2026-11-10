@@ -56,7 +56,7 @@ export function CopyButton({ value, label, text = "Copy", showValue = true }: Pr
         type="button"
         aria-label={label}
         onClick={copy}
-        className="rounded-xs border border-hairline-strong px-xs text-eyebrow text-ink-muted hover:text-ink"
+        className="min-h-[28px] rounded-xs border border-hairline-strong px-sm text-eyebrow text-ink-muted hover:border-ink-subtle hover:text-ink"
       >
         {copied ? "Copied" : text}
       </button>

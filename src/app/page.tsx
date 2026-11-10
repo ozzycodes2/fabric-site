@@ -3,18 +3,15 @@ import { palette } from "@/lib/palette";
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-[592px] px-lg pt-xxl">
-      <p className="mb-md text-eyebrow font-medium uppercase tracking-[0.5px] text-ink-subtle">
-        A theme in dusk and dawn
-      </p>
-      <h1 className="mb-md text-[32px] leading-none font-semibold tracking-[-0.8px] sm:text-display">
+    <main className="mx-auto max-w-[960px] px-lg pt-section">
+      <h1 className="mb-lg max-w-[720px] text-[40px] leading-none font-semibold tracking-[-1.2px] text-balance sm:text-[56px] sm:tracking-[-2px]">
         Colour only where it signals.
       </h1>
-      <p className="mb-xl text-body text-ink-muted">
-        Near-neutral grounds and one signal orange, after the Braun products of Dieter Rams. The terminal palette comes
-        from the 1970s catalogue.
+      <p className="mb-xxl max-w-[592px] text-subhead text-ink-muted">
+        A theme in dusk and dawn. Near-neutral grounds and one signal orange, after the Braun products of Dieter Rams.
+        The terminal palette comes from the 1970s catalogue.
       </p>
-      <div className="flex flex-col gap-md">
+      <div className="grid gap-lg sm:grid-cols-2">
         {palette.variants.map((v) => (
           <SwatchStrip key={v.slug} palette={palette} variant={v.slug} />
         ))}

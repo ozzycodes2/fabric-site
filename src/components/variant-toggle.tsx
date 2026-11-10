@@ -51,7 +51,7 @@ export function VariantToggle() {
   }
 
   return (
-    <div role="group" aria-label="Variant" className="inline-flex rounded-full border border-hairline p-[2px]">
+    <div role="group" aria-label="Variant" className="inline-flex rounded-full border border-hairline p-[3px]">
       {VARIANTS.map((v) => (
         <button
           key={v}
@@ -60,7 +60,7 @@ export function VariantToggle() {
           aria-label={v}
           title={v}
           onClick={() => choose(v)}
-          className="inline-flex items-center rounded-full px-xs py-xxs aria-pressed:bg-surface-2"
+          className="inline-flex min-h-[32px] items-center rounded-full px-xs sm:px-sm aria-pressed:bg-surface-3"
         >
           <HorizonIcon variant={v} />
         </button>

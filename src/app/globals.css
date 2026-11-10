@@ -123,3 +123,38 @@ body {
       background-color 150ms ease;
   }
 }
+
+::selection {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-focus);
+  outline-offset: 2px;
+}
+
+html {
+  scrollbar-color: var(--hairline-strong) var(--canvas);
+}
+
+/* The palette page renders both variants; show only the one the site is in.
+   Mirrors the selector order tokensCss() uses for the colour tokens. */
+[data-show="dawn"],
+html[data-variant="dawn"] [data-show="dusk"] {
+  display: none;
+}
+
+html[data-variant="dawn"] [data-show="dawn"] {
+  display: block;
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-variant]) [data-show="dusk"] {
+    display: none;
+  }
+
+  html:not([data-variant]) [data-show="dawn"] {
+    display: block;
+  }
+}

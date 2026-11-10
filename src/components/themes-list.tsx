@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Segmented } from "./segmented";
 import type { Port } from "@/lib/ports";
 
 export function ThemesList({ ports }: { ports: Port[] }) {
@@ -10,26 +11,27 @@ export function ThemesList({ ports }: { ports: Port[] }) {
 
   return (
     <div>
-      <div role="group" aria-label="Category" className="mb-lg flex flex-wrap gap-xs">
-        {categories.map((c) => (
-          <button
-            key={c}
-            type="button"
-            aria-pressed={category === c}
-            onClick={() => setCategory(c)}
-            className="rounded-full border border-hairline-strong px-md py-xxs text-caption text-ink-muted aria-pressed:bg-surface-2 aria-pressed:text-ink"
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-      <ul className="m-0 list-none border-y border-hairline p-0">
+      <Segmented label="Category" options={categories} value={category} onChange={setCategory} />
+      <ul className="m-0 mt-xl grid list-none gap-md p-0 sm:grid-cols-2">
         {shown.map((p) => (
-          <li key={p.slug} className="flex items-baseline justify-between border-b border-hairline py-sm last:border-b-0">
-            <a href={p.url} className="text-ink underline decoration-1 underline-offset-2">
-              {p.name}
+          <li key={p.slug}>
+            <a
+              href={p.url}
+              className="group flex h-full flex-col gap-lg rounded-lg border border-hairline bg-surface-1 p-lg hover:border-hairline-strong hover:bg-surface-2"
+            >
+              <span className="flex items-baseline justify-between gap-md">
+                <span className="text-subhead font-semibold text-ink underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-primary">
+                  {p.name}
+                </span>
+                <span className="rounded-full border border-hairline-strong px-sm text-eyebrow leading-[22px] text-ink-muted">
+                  {p.category}
+                </span>
+              </span>
+              <span className="mt-auto flex justify-between text-caption text-ink-subtle">
+                <span className="capitalize">{p.type}</span>
+                {p.contributors[0] && <span>by {p.contributors[0].name}</span>}
+              </span>
             </a>
-            <small className="text-caption text-ink-subtle">{p.category}</small>
           </li>
         ))}
       </ul>

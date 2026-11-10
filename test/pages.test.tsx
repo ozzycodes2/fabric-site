@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { PaletteView } from "@/components/palette-view";
 import { SiteFooter } from "@/components/site-footer";
@@ -10,6 +10,8 @@ import { groupRoles } from "@/lib/palette-groups";
 import { palette } from "@/lib/palette";
 import type { Port } from "@/lib/ports";
 import Home from "@/app/page";
+
+vi.mock("next/navigation", () => ({ usePathname: () => "/palette" }));
 
 afterEach(cleanup);
 
@@ -32,9 +34,16 @@ describe("ThemesList", () => {
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
     fireEvent.click(screen.getByRole("button", { name: "editor" }));
     expect(screen.getAllByRole("listitem")).toHaveLength(1);
-    expect(screen.getByRole("link", { name: "Beta" }).getAttribute("href")).toBe("https://x.test/b");
+    expect(screen.getByRole("link", { name: /Beta/ }).getAttribute("href")).toBe("https://x.test/b");
     fireEvent.click(screen.getByRole("button", { name: "all" }));
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
+  });
+
+  it("credits the first contributor when there is one", () => {
+    const withContributor = { ...mk("c", "Gamma", "terminal"), contributors: [{ name: "ada", url: "https://x.test/ada" }] };
+    render(<ThemesList ports={[withContributor, mk("d", "Delta", "terminal")]} />);
+    expect(screen.getByText("by ada")).toBeTruthy();
+    expect(screen.getAllByText(/^by /)).toHaveLength(1);
   });
 });
 
@@ -46,6 +55,19 @@ describe("PaletteView", () => {
     expect(screen.getAllByText("rgb(239 99 6)").length).toBeGreaterThan(0);
     expect(screen.getAllByRole("button", { name: /Copy CSS for/ })).toHaveLength(2);
     expect(screen.getAllByRole("heading", { level: 3, name: "Terminal" })).toHaveLength(2);
+  });
+
+  it("tags each variant section for CSS to show only the active one", () => {
+    const { container } = render(<PaletteView palette={palette} />);
+    expect(Array.from(container.querySelectorAll("section")).map((s) => s.dataset.show)).toEqual(["dusk", "dawn"]);
+  });
+
+  it("paints a terminal sample in each variant's own colours", () => {
+    render(<PaletteView palette={palette} />);
+    const dawn = screen.getByLabelText("Terminal sample in dawn");
+    const canvas = palette.ui.find((r) => r.slug === "canvas")!.dawn.rgb.join(", ");
+    expect(dawn.style.background).toBe(`rgb(${canvas})`);
+    expect(dawn.textContent).toContain("git status");
   });
 });
 
@@ -73,6 +95,8 @@ describe("chrome", () => {
       ["Integrations", "/integrations"],
       ["Palette", "/palette"],
     ]);
+    expect(nav.querySelector("[aria-current=page]")!.textContent).toBe("Palette");
+    expect(nav.querySelectorAll("[aria-current]")).toHaveLength(1);
     expect(screen.getByRole("link", { name: "Submit an integration" })).toBeTruthy();
     expect(container.querySelectorAll("figure span[title]")).toHaveLength(7);
     expect(container.querySelector("figcaption span")!.className).toContain("capitalize");
