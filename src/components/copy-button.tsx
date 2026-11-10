@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   value: string;
@@ -11,32 +11,45 @@ type Props = {
 
 export function CopyButton({ value, label, text = "Copy", showValue = true }: Props) {
   const ref = useRef<HTMLElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const [copied, setCopied] = useState(false);
+  const [failed, setFailed] = useState(false);
 
-  // Fallback when the Clipboard API is unavailable or refused: select the
-  // value so the reader can copy it by hand.
-  function select() {
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  // Fallback when the Clipboard API is unavailable or refused: reveal the
+  // value and select it so the reader can copy it by hand.
+  useEffect(() => {
     const sel = window.getSelection();
-    if (!sel || !ref.current) return;
+    if (!failed || !sel || !ref.current) return;
     const range = document.createRange();
     range.selectNodeContents(ref.current);
     sel.removeAllRanges();
     sel.addRange(range);
-  }
+  }, [failed]);
 
   async function copy() {
+    clearTimeout(timer.current);
     try {
       await navigator.clipboard.writeText(value);
+      setFailed(false);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      timer.current = setTimeout(() => setCopied(false), 1500);
     } catch {
-      select();
+      setCopied(false);
+      setFailed(true);
     }
   }
 
+  const visible = showValue || failed;
   return (
-    <span className="inline-flex items-center gap-sm">
-      <code ref={ref} className={showValue ? "font-mono text-mono text-ink-muted" : "sr-only"}>
+    <span className="inline-flex flex-wrap items-center gap-sm">
+      <code
+        ref={ref}
+        className={
+          !visible ? "sr-only" : showValue ? "font-mono text-mono text-ink-muted" : "block w-full whitespace-pre font-mono text-mono text-ink-muted"
+        }
+      >
         {value}
       </code>
       <button
@@ -47,6 +60,9 @@ export function CopyButton({ value, label, text = "Copy", showValue = true }: Pr
       >
         {copied ? "Copied" : text}
       </button>
+      <span role="status" aria-live="polite" className="sr-only">
+        {copied ? "Copied" : ""}
+      </span>
     </span>
   );
 }

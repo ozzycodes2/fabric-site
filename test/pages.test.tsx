@@ -60,5 +60,7 @@ describe("chrome", () => {
     expect(screen.getByRole("link", { name: "Palette" }).getAttribute("href")).toBe("/palette");
     expect(screen.getByRole("link", { name: "Submit a port" })).toBeTruthy();
     expect(container.querySelectorAll("figure span[title]")).toHaveLength(7);
+    expect(container.querySelector("figcaption span")!.className).toContain("capitalize");
+    expect(screen.getByText("fabric-dawn")).toBeTruthy();
   });
 });

@@ -8,7 +8,7 @@ export function SwatchStrip({ palette, variant }: { palette: Palette; variant: V
   return (
     <figure className="m-0">
       <figcaption className="mb-xs flex justify-between text-caption text-ink-subtle">
-        <span>{meta?.name}</span>
+        <span className="capitalize">{variant}</span>
         <span>{meta?.id}</span>
       </figcaption>
       <div className="flex h-[28px] overflow-hidden rounded-sm border border-hairline">
