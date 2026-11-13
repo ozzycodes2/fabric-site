@@ -1,5 +1,5 @@
 {
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"variants": [
 		{
 			"slug": "dusk",
@@ -20,29 +20,29 @@
 			"name": "Primary",
 			"use": "Accent fill for the CTA, emphasis edge, focus ring and selection; never type",
 			"dusk": {
-				"hex": "#ef6306",
+				"hex": "#ff6a13",
 				"rgb": [
-					239,
-					99,
-					6
+					255,
+					106,
+					19
 				],
 				"hsl": [
-					24,
-					95,
-					48
+					22,
+					100,
+					54
 				]
 			},
 			"dawn": {
-				"hex": "#ef6306",
+				"hex": "#ff6a13",
 				"rgb": [
-					239,
-					99,
-					6
+					255,
+					106,
+					19
 				],
 				"hsl": [
-					24,
-					95,
-					48
+					22,
+					100,
+					54
 				]
 			}
 		},
@@ -82,29 +82,29 @@
 			"name": "Primary Hover",
 			"use": "Primary fill while hovered, one step brighter",
 			"dusk": {
-				"hex": "#fa6a07",
+				"hex": "#ff7422",
 				"rgb": [
-					250,
-					106,
-					7
+					255,
+					116,
+					34
 				],
 				"hsl": [
-					24,
-					96,
-					50
+					22,
+					100,
+					57
 				]
 			},
 			"dawn": {
-				"hex": "#fa6a07",
+				"hex": "#ff7422",
 				"rgb": [
-					250,
-					106,
-					7
+					255,
+					116,
+					34
 				],
 				"hsl": [
-					24,
-					96,
-					50
+					22,
+					100,
+					57
 				]
 			}
 		},
@@ -113,29 +113,29 @@
 			"name": "Primary Focus",
 			"use": "Primary fill while pressed or focused, the deepest step",
 			"dusk": {
-				"hex": "#d65905",
+				"hex": "#e35400",
 				"rgb": [
-					214,
-					89,
-					5
+					227,
+					84,
+					0
 				],
 				"hsl": [
-					24,
-					95,
-					43
+					22,
+					100,
+					45
 				]
 			},
 			"dawn": {
-				"hex": "#d65905",
+				"hex": "#e35400",
 				"rgb": [
-					214,
-					89,
-					5
+					227,
+					84,
+					0
 				],
 				"hsl": [
-					24,
-					95,
-					43
+					22,
+					100,
+					45
 				]
 			}
 		},

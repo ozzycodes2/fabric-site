@@ -6,9 +6,9 @@ const accent = palette.ui.find((r) => r.slug === "primary")!.dusk;
 
 describe("formatColor", () => {
   it("formats hex, rgb and hsl", () => {
-    expect(formatColor(accent, "hex")).toBe("#ef6306");
-    expect(formatColor(accent, "rgb")).toBe("rgb(239 99 6)");
-    expect(formatColor(accent, "hsl")).toBe("hsl(24 95% 48%)");
+    expect(formatColor(accent, "hex")).toBe("#ff6a13");
+    expect(formatColor(accent, "rgb")).toBe("rgb(255 106 19)");
+    expect(formatColor(accent, "hsl")).toBe("hsl(22 100% 54%)");
   });
 });
 
@@ -16,7 +16,7 @@ describe("cssForVariant", () => {
   it("lists every custom property of one variant", () => {
     const css = cssForVariant(palette, "dawn");
     expect(css).toMatch(/^:root \{/);
-    expect(css).toContain("--primary: #ef6306;");
+    expect(css).toContain("--primary: #ff6a13;");
     expect(css).toContain("--term-red:");
     expect(css).not.toContain("--canvas: #010102");
   });

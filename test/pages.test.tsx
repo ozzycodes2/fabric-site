@@ -67,9 +67,9 @@ describe("IntegrationsList", () => {
 describe("PaletteView", () => {
   it("switches color format and offers Copy CSS per variant", () => {
     render(<PaletteView palette={palette} />);
-    expect(screen.getAllByText("#ef6306").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("#ff6a13").length).toBeGreaterThan(0);
     fireEvent.click(screen.getByRole("button", { name: "rgb" }));
-    expect(screen.getAllByText("rgb(239 99 6)").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("rgb(255 106 19)").length).toBeGreaterThan(0);
     expect(screen.getAllByRole("button", { name: /Copy CSS for/ })).toHaveLength(2);
     expect(screen.getAllByRole("heading", { level: 3, name: "Terminal" })).toHaveLength(2);
   });

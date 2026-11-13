@@ -6,7 +6,7 @@ import type { VariantSlug } from "@/lib/palette";
 const VARIANTS: VariantSlug[] = ["dusk", "dawn"];
 
 // A sun on the horizon; the arrow points down at dusk (sunset) and up at dawn
-// (sunrise). Drawn in ink, not the accent: on dawn the accent reads 2.96:1,
+// (sunrise). Drawn in ink, not the accent: on dawn the accent reads 2.61:1,
 // under the 3:1 an icon needs when it alone identifies the control.
 function HorizonIcon({ variant }: { variant: VariantSlug }) {
   return (

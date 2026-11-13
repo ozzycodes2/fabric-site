@@ -109,7 +109,7 @@ export const STEPS: TypeStep[] = [
     lineHeight: 1.6,
     tracking: 0,
     use: "Inline code and code blocks.",
-    sample: "--primary: #ef6306;",
+    sample: "--primary: #ff6a13;",
     className: "font-mono text-mono",
   },
 ];
