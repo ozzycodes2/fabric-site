@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ozzycodes2/fabric-theme/main/assets/wordmark-dusk.svg">
+    <img src="https://raw.githubusercontent.com/ozzycodes2/fabric-theme/main/assets/wordmark.svg" alt="fabric" width="200">
+  </picture>
+</p>
+
 # fabric-site
 
 The site for [Fabric](https://github.com/ozzycodes2/fabric-theme), a color

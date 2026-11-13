@@ -111,6 +111,8 @@ html[data-variant="dawn"] {
 @layer base {
   html {
     font-family: var(--font-sans);
+    /* Pin every step to Inter's text cut, as the static files rendered it. */
+    font-optical-sizing: none;
   }
 
   code,

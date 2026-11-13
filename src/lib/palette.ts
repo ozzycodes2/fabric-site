@@ -29,3 +29,7 @@ export type Palette = {
 };
 
 export const palette: Palette = data as Palette;
+
+export function canvasOf(p: Palette, variant: VariantSlug): string {
+  return p.ui.find((r) => r.slug === "canvas")![variant].hex;
+}

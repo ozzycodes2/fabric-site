@@ -37,13 +37,24 @@ function current(): VariantSlug {
   return light ? "dawn" : "dusk";
 }
 
-export function VariantToggle() {
+// The theme-color metas follow the OS through their media queries; a manual
+// choice has to overwrite both, or the chrome keeps the OS variant's ground.
+function paintChrome(color: string) {
+  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute("content", color));
+}
+
+export function VariantToggle({ chrome }: { chrome: Record<VariantSlug, string> }) {
   const [active, setActive] = useState<VariantSlug | null>(null);
 
-  useEffect(() => setActive(current()), []);
+  useEffect(() => {
+    const set = document.documentElement.dataset.variant;
+    if (set === "dusk" || set === "dawn") paintChrome(chrome[set]);
+    setActive(current());
+  }, [chrome]);
 
   function choose(v: VariantSlug) {
     document.documentElement.dataset.variant = v;
+    paintChrome(chrome[v]);
     try {
       localStorage.setItem("fabric-variant", v);
     } catch {

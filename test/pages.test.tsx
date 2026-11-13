@@ -146,4 +146,12 @@ describe("chrome", () => {
     expect(container.querySelector("figcaption span")!.className).toContain("capitalize");
     expect(screen.getByText("fabric-dawn")).toBeTruthy();
   });
+
+  it("reads the wordmark as fabric and dots its dotless i with the accent square", () => {
+    render(<SiteHeader />);
+    const home = screen.getByRole("link", { name: "fabric" });
+    const glyphs = home.querySelector("[aria-hidden]")!;
+    expect(glyphs.textContent).toBe("fabrıc");
+    expect(glyphs.querySelector(".bg-primary")!.parentElement!.textContent).toBe("ı");
+  });
 });
