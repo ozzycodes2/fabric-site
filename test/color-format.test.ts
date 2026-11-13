@@ -18,7 +18,7 @@ describe("cssForVariant", () => {
     expect(css).toMatch(/^:root \{/);
     expect(css).toContain("--primary: #ff6a13;");
     expect(css).toContain("--term-red:");
-    expect(css).not.toContain("--canvas: #010102");
+    expect(css).not.toContain("--canvas: #101214");
   });
 });
 

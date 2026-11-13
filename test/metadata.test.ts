@@ -9,7 +9,7 @@ describe("site metadata", () => {
     expect(viewport.colorScheme).toBe("dark light");
     expect(viewport.themeColor).toEqual([
       { media: "(prefers-color-scheme: light)", color: "#eceef0" },
-      { media: "(prefers-color-scheme: dark)", color: "#010102" },
+      { media: "(prefers-color-scheme: dark)", color: "#101214" },
     ]);
   });
 
@@ -22,7 +22,7 @@ describe("site metadata", () => {
   it("ships a manifest with the mark, including a maskable icon", () => {
     const m = manifest();
     expect(m.name).toBe("fabric");
-    expect(m.theme_color).toBe("#010102");
+    expect(m.theme_color).toBe("#101214");
     expect(m.icons!.map((i) => i.src)).toEqual(["/icon-192.png", "/icon-512.png", "/icon-maskable-512.png"]);
     expect(m.icons![2].purpose).toBe("maskable");
   });

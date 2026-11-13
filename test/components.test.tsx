@@ -5,14 +5,14 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { VariantToggle } from "@/components/variant-toggle";
 import { VariantScript, variantScript } from "@/components/variant-script";
 
-const chrome = { dusk: "#010102", dawn: "#eceef0" };
+const chrome = { dusk: "#101214", dawn: "#eceef0" };
 
 beforeEach(() => {
   localStorage.clear();
   document.documentElement.removeAttribute("data-variant");
   document.head.innerHTML =
     '<meta name="theme-color" media="(prefers-color-scheme: light)" content="#eceef0">' +
-    '<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#010102">';
+    '<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101214">';
 });
 
 const themeColors = () =>
@@ -78,16 +78,16 @@ describe("VariantToggle", () => {
 
   it("repaints both theme-color metas with the chosen variant's canvas", () => {
     render(<VariantToggle chrome={chrome} />);
-    expect(themeColors()).toEqual(["#eceef0", "#010102"]);
+    expect(themeColors()).toEqual(["#eceef0", "#101214"]);
     fireEvent.click(screen.getByRole("button", { name: "dawn" }));
     expect(themeColors()).toEqual(["#eceef0", "#eceef0"]);
     fireEvent.click(screen.getByRole("button", { name: "dusk" }));
-    expect(themeColors()).toEqual(["#010102", "#010102"]);
+    expect(themeColors()).toEqual(["#101214", "#101214"]);
   });
 
   it("repaints the chrome on load for a stored variant", () => {
     document.documentElement.dataset.variant = "dusk";
     render(<VariantToggle chrome={chrome} />);
-    expect(themeColors()).toEqual(["#010102", "#010102"]);
+    expect(themeColors()).toEqual(["#101214", "#101214"]);
   });
 });

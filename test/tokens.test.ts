@@ -13,7 +13,7 @@ function block(selector: string): string {
 
 describe("tokensCss", () => {
   it("declares dusk values in the dusk block", () => {
-    expect(block('[data-variant="dusk"]')).toContain("--canvas: #010102");
+    expect(block('[data-variant="dusk"]')).toContain("--canvas: #101214");
   });
 
   it("declares dawn values in the dawn block", () => {
@@ -26,7 +26,7 @@ describe("tokensCss", () => {
   });
 
   it("defaults to dusk and follows a light OS preference through media query", () => {
-    expect(block(":root")).toContain("--canvas: #010102");
+    expect(block(":root")).toContain("--canvas: #101214");
     const media = css.indexOf("@media (prefers-color-scheme: light)");
     expect(media).toBeGreaterThanOrEqual(0);
     const after = css.slice(media);
